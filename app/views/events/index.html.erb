@@ -2,10 +2,10 @@
     <% @events.each do |event| %>
         <li>
             <div> 
-                    <p>created by <%= event.creator.name%></p>
                     <h4> <%= event.title%> </h4>
-                    <p> <%= event.date %> </p>
-                    <p> <%= event.location %> </p>
+                    <p>created by <%= event.creator.name%></p>
+                    <h5> <%= link_to "click for details", event_path(event), class: "link" %> </h5>
+                    
             </div>
         </li>
     <% end %>

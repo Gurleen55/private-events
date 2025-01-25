@@ -1,0 +1,19 @@
+<h3>Event Details</h3>
+<%= render @event%>
+<% if user_signed_in? %>
+    <% if @event.attendees.include?(current_user) %>
+        <%= link_to 'Leave Event', event_event_attendee_path(@event, current_user), data: { turbo_method: :delete}, class: "btn btn-danger" %>
+    <% else %>
+        <%= link_to "Attend Event", event_event_attendees_path(@event), data: { turbo_method: :post }, class: "btn btn-primary" %>
+    <% end %>
+<ul>
+    <% if @event.attendees.any? %>
+        <h6>people attending this event</h4>
+        <% @event.attendees.each do |attendee|%>
+            <li> <%= attendee.name %> </li>
+        <% end %>
+    <% else %>
+        <h6> no one has signed up for this event yet</h6>
+    <% end %>
+</ul>
+<% end %>

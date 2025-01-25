@@ -27,12 +27,14 @@
   <body>
     <%= render partial: "shared/navbar" %>
 
-    <% if flash.any? %>
-      <% flash.each do |key, message| %>
-        <div>
-          <%= message %>
-        </div>
-      <% end %>
+    <% if notice %>
+      <div class="alert alert-success">
+        <%= notice %>
+      </div>
+    <% elsif alert %>
+      <div class="alert alert-danger">
+        <%= alert %>
+      </div>
     <% end %>
     <%= yield %>
   </body>
