@@ -25,6 +25,8 @@
   </head>
 
   <body>
+    <%= render partial: "shared/navbar" %>
+
     <% if flash.any? %>
       <% flash.each do |key, message| %>
         <div>

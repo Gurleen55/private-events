@@ -1,6 +1,11 @@
-<% current_user.events.all.each do |event| %>
-    <h4> <%= event.title%> </h4>
-    <p> <%= event.date %> </p>
-    <p> <%= event.location %> </p>
-<% end %>
+<h3> My Events </h3>
+<ul>
+    <li>
+    <% current_user.events.all.each do |event| %>
+        <h4> <%= event.title%> </h4>
+        <p> <%= event.date %> </p>
+        <p> <%= event.location %> </p>
+    <% end %>
+    </li>
+</ul>
 

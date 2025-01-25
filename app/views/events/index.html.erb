@@ -1,5 +1,12 @@
-<% @events.each do |event| %>
-    <h4> <%= event.title%> </h4>
-    <p> <%= event.date %> </p>
-    <p> <%= event.location %> </p>
-<% end %>
+<ul>
+    <% @events.each do |event| %>
+        <li>
+            <div> 
+                    <p>created by <%= event.creator.name%></p>
+                    <h4> <%= event.title%> </h4>
+                    <p> <%= event.date %> </p>
+                    <p> <%= event.location %> </p>
+            </div>
+        </li>
+    <% end %>
+</ul>
