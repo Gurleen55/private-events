@@ -1,12 +1,5 @@
 <ul>
-    <% @events.each do |event| %>
-        <li>
-            <div> 
-                    <h4> <%= event.title%> </h4>
-                    <p>created by <%= event.creator.name%></p>
-                    <h5> <%= link_to "click for details", event_path(event), class: "link" %> </h5>
-                    
-            </div>
-        </li>
+    <% @events.each do |event| %>       
+            <%= render partial: "shared/event", object: event %>
     <% end %>
 </ul>
