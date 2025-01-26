@@ -8,9 +8,9 @@
     <% end %>
 </ul>
 
-<h3> Attending </h3>
+<h3> Past Events </h3>
 <ul>
-    <% current_user.attended_events.each do |event|%>
+    <% current_user.attended_events.past.each do |event|%>
         <li>
             <h4> <%= event.title%> </h4>
             <h5> <%= link_to "click for details", event_path(event), class: "link" %> </h5>
@@ -18,3 +18,12 @@
     <% end %>
 </ul>
 
+<h3> Upcoming Events </h3>
+<ul>
+    <% current_user.attended_events.future.each do |event|%>
+        <li>
+            <h4> <%= event.title%> </h4>
+            <h5> <%= link_to "click for details", event_path(event), class: "link" %> </h5>
+        </li>
+    <% end %>
+</ul>
