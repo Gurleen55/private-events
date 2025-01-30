@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_27_162147) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_29_222626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_27_162147) do
     t.index ["attended_event_id"], name: "index_event_attendees_on_attended_event_id"
     t.index ["attendee_id", "attended_event_id"], name: "index_event_attendees_on_attendee_id_and_attended_event_id", unique: true
     t.index ["attendee_id"], name: "index_event_attendees_on_attendee_id"
+  end
+
+  create_table "event_invitees", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_invitees_on_event_id"
+    t.index ["user_id"], name: "index_event_invitees_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -49,5 +59,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_27_162147) do
 
   add_foreign_key "event_attendees", "events", column: "attended_event_id", on_delete: :cascade
   add_foreign_key "event_attendees", "users", column: "attendee_id"
+  add_foreign_key "event_invitees", "events"
+  add_foreign_key "event_invitees", "users"
   add_foreign_key "events", "users"
 end

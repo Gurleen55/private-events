@@ -31,7 +31,12 @@ class EventsController < ApplicationController
   end
 
   def show
+    puts "current_user: #{current_user.inspect}" # Debugging line
     @event = Event.find(params[:id])
+
+    unless @event.invitees.include?(current_user) || @event.creator == current_user
+      redirect_to root_path, alert: "you are not invited to this event"
+    end
   end
 
   def destroy
@@ -41,6 +46,19 @@ class EventsController < ApplicationController
       redirect_to root_path, notice: "Event deleted successfully"
     else
       redirect_to root_path, alert: "Event not found or not authorized to delete."
+    end
+  end
+
+  def invite
+    @event = Event.find(params[:id])
+    user = User.find_by(email: params[:email])
+    puts "params[:email]: #{params[:email].inspect}"
+
+    if user
+      @event.event_invitees.create(user: user)
+      redirect_to @event, notice: "User Invited Successfully"
+    else
+      redirect_to @event, alert: "User not found or already invited"
     end
   end
 

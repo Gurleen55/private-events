@@ -1,0 +1,14 @@
+<% if @invitations.pending.any? %>
+<h2>Pending Invitations</h2>
+<ul>
+     <% @invitations.each do |invite| %>
+    <li>
+      <%= invite.event.title %>
+      <%= link_to "Accept", accept_event_invitee_path(invite), data: { turbo_method: :patch} %>
+      <%= link_to "Decline", decline_event_invitee_path(invite), data: {turbo_method: :patch}%>
+    </li>
+  <% end %>
+</ul>
+<% else %>
+<h2>No Invites</h2>
+<% end %>

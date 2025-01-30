@@ -2,9 +2,20 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :events do
+    member do
+      post :invite # custom route for inviting users
+    end
     resources :event_attendees, only: [ :create, :destroy ]
   end
   resources :users
+  resources :event_invitees, only: [] do
+    member do
+      patch :accept
+      patch :decline
+    end
+  end
+
+  get "invitations", to: "users#invitation"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

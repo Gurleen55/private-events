@@ -3,6 +3,13 @@
     <p>created by <%= event.creator.name%></p>
     <h5> <%= link_to "Details", event_path(event), class: "link" %> </h5>
     <% if event.creator == current_user %>
+
+            <%= form_with url: invite_event_path(event), method: :post do |form| %>
+                <%= form.label :email, "Invite a user by email" %>
+                <%= form.email_field :email, required: true %>
+                <%= form.submit "Send Invitation" %>
+            <% end %>
+
         <h5> <%= link_to "Edit", edit_event_path(event), class: "link" %> </h5>
         <h5> <%= link_to "Delete", event_path(event), class: "link", data: { turbo_confirm: "are you sure yu want to delete this event?", turbo_method: :delete}, class: "btn btn-danger" %> </h5>
     <% end %>
